@@ -24,7 +24,12 @@ def adicionar_tarefa(prioridade: bool, tarefa: str):
     # do tipo ValueError com a mensagem "Prioridade inválida"
     # Caso a tarefa já exista na lista, levante uma exceção do tipo ValueError
     # com a mensagem "Tarefa já existe"
-    raise NotImplementedError("Adicionar tarefas não implementado")
+    if not isinstance(prioridade, bool):
+        raise ValueError("Prioridade inválida")
+    for dicionario in lista_de_tarefas:
+        if dicionario["tarefa"] == tarefa:
+            raise ValueError("Tarefa já existe")
+    lista_de_tarefas.append({"prioridade": prioridade, "tarefa": tarefa})
 
 
 def remove_tarefas(índices: tuple[int]):
