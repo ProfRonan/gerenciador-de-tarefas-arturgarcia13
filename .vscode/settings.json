@@ -16,5 +16,6 @@
   },
   "python.formatting.provider": "autopep8",
   "editor.formatOnSave": true,
-  "pylint.args": ["--disable=non-ascii-name"]
+  "pylint.args": ["--disable=non-ascii-name"],
+  "githubPullRequests.ignoredPullRequestBranches": ["main"]
 }

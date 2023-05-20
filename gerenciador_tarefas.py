@@ -1,7 +1,7 @@
 """
 Modulo que implementa um gerenciador de tarefas
 """
-
+import string as st
 
 lista_de_tarefas: list[dict[str]] = [
     {"prioridade": True, "tarefa": "Estudar Python"},
@@ -19,11 +19,6 @@ def adicionar_tarefa(prioridade: bool, tarefa: str):
         prioridade (bool): True se a tarefa tem prioridade alta, False caso contrário
         tarefa (str): string que representa a tarefa
     """
-    # TODO: coloque o código aqui para adicionar um tarefa na lista
-    # Caso a prioridade não seja True ou False, levante uma exceção
-    # do tipo ValueError com a mensagem "Prioridade inválida"
-    # Caso a tarefa já exista na lista, levante uma exceção do tipo ValueError
-    # com a mensagem "Tarefa já existe"
     if not isinstance(prioridade, bool):
         raise ValueError("Prioridade inválida")
     for dicionario in lista_de_tarefas:
@@ -41,11 +36,10 @@ def remove_tarefas(índices: tuple[int]):
         índices (tuple[int]): tupla de inteiros que representam os índices das tarefas
                              que devem ser removidas da lista.
     """
-    # TODO: coloque o código aqui para remover um tarefa na lista
-    # Caso a tarefa não exista na lista, levante uma exceção do tipo ValueError
-    # com a mensagem "Tarefa não existe"
-    raise NotImplementedError("Remover tarefas não implementado")
-
+    if len(índices) < 0 or len(índices) >= len(lista_de_tarefas):
+            raise ValueError("Tarefa não existe")
+    for index in índices:
+        del lista_de_tarefas[index]
 
 def encontra_tarefa(tarefa: str) -> int:
     """
@@ -55,10 +49,10 @@ def encontra_tarefa(tarefa: str) -> int:
     Args:
         tarefa (str): string que representa a tarefa
     """
-    # TODO: coloque o código aqui para encontrar um tarefa na lista
-    # Caso a tarefa não exista na lista, levante uma exceção do tipo ValueError
-    # com a mensagem "Tarefa não existe"
-    raise NotImplementedError("Encontrar tarefas não implementado")
+    for index, dicionario in enumerate(lista_de_tarefas):
+        if dicionario["tarefa"] == tarefa:
+            return index
+    raise ValueError("Tarefa não existe")
 
 
 def ordena_por_prioridade():
@@ -68,13 +62,24 @@ def ordena_por_prioridade():
     As tarefas prioritárias devem ser ordenadas por ordem alfabética e as
     tarefas não prioritárias devem ser ordenadas por ordem alfabética.
     """
-    # TODO: coloque o código aqui para ordenar a lista de tarefas por prioridade
-    # com as tarefas prioritárias no início da lista, seguidas pelas tarefas
-    # não prioritárias.
-    # As tarefas prioritárias devem ser ordenadas por ordem alfabética e as
-    # tarefas não prioritárias devem ser ordenadas por ordem alfabética.
-    raise NotImplementedError("Ordenar tarefas não implementado")
-
+    alphabet = list(st.ascii_lowercase)
+    index = 0
+    for i, tarefas in enumerate(lista_de_tarefas):
+        # Ordenar as tarefas tarefas prioritárias no começo da lista
+        if tarefas["prioridade"]:
+            lista_de_tarefas.insert(0, lista_de_tarefas.pop(i))
+            # Ordenar as tarefas prioritárias por ordem alfabética
+            for caracter in tarefas["tarefa"]:
+                if caracter in alphabet[::-1]:
+                    lista_de_tarefas.insert(0, lista_de_tarefas.pop(i))
+            # Encontrar o index da ultima tarefa com prioridade
+            index = int(i) 
+        # Ordenar as tarefas não prioritárias
+        if not tarefas["prioridade"]:
+            for caracter in tarefas["tarefa"]:
+                if caracter in alphabet:
+                    lista_de_tarefas.insert(index, lista_de_tarefas.pop(i))
+    return lista_de_tarefas
 
 def get_lista_de_tarefas():
     """
