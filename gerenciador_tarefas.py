@@ -65,13 +65,13 @@ def ordena_por_prioridade():
     for i, tarefa in enumerate(lista_de_tarefas):
         if tarefa["prioridade"]:
             lista_de_tarefas.insert(0, lista_de_tarefas.pop(i))
-        # Encontrar o index da primeira tarefa sem prioridade
-    indice: int("primeira tarefa sem prioridade") = [index for index, elemento in enumerate(lista_de_tarefas) if not elemento["prioridade"]].pop(0)
+    # Encontrar o index da primeira tarefa sem prioridade
+    indice = int([index for index, elemento in enumerate(lista_de_tarefas) if not elemento["prioridade"]].pop(0))
     # Ordenar as tarefas prioritárias por ordem alfabética
-    lista_ordenada_true = sorted(lista_de_tarefas[0,indice], key=lambda dicionario: dicionario["tarefa"])
+    lista_ordenada_true = sorted(lista_de_tarefas[0:indice], key=lambda dicionario: dicionario["tarefa"])
     for task in lista_ordenada_true:
         lista_de_tarefas.insert(0, task)
-    return lista_de_tarefas
+    
     # Ordenar as tarefas não prioritárias por ordem alfabética
     '''lista_ordenada_false = sorted(lista_de_tarefas[indice,-1], key=lambda dicionario: dicionario["tarefa"])
     for task in lista_ordenada_false:
