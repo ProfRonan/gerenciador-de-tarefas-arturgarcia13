@@ -61,6 +61,7 @@ def ordena_por_prioridade():
     As tarefas prioritárias devem ser ordenadas por ordem alfabética e as
     tarefas não prioritárias devem ser ordenadas por ordem alfabética.
     """
+    global lista_de_tarefas
     # Ordenar as tarefas tarefas prioritárias no começo da lista
     for i, tarefa in enumerate(lista_de_tarefas):
         if tarefa["prioridade"]:
@@ -69,12 +70,16 @@ def ordena_por_prioridade():
     indice = int([index for index, elemento in enumerate(lista_de_tarefas) if not elemento["prioridade"]].pop(0))
     # Ordenar as tarefas prioritárias por ordem alfabética
     lista_ordenada_true = sorted(lista_de_tarefas[0:indice], key=lambda dicionario: dicionario["tarefa"])
-    for task in lista_ordenada_true:
-        lista_de_tarefas.insert(0, task)
-    
+    for i, dicionário in enumerate(lista_de_tarefas[0:indice]):
+        for dict in lista_ordenada_true:
+            if dict["tarefa"] == dicionário["tarefa"]:
+                lista_de_tarefas.remove(dicionário)
+                lista_de_tarefas.insert(0, dict)
+            return print(lista_de_tarefas)
+
     # Ordenar as tarefas não prioritárias por ordem alfabética
-    '''lista_ordenada_false = sorted(lista_de_tarefas[indice,-1], key=lambda dicionario: dicionario["tarefa"])
-    for task in lista_ordenada_false:
+    lista_ordenada_false = sorted(lista_de_tarefas[indice:-1], key=lambda dicionario: dicionario["tarefa"])
+    '''for task in lista_ordenada_false:
         lista_de_tarefas.insert(indice, task)'''
 
 
