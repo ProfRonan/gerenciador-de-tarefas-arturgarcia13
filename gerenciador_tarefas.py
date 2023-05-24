@@ -65,9 +65,7 @@ def ordena_por_prioridade():
     tarefas não prioritárias devem ser ordenadas por ordem alfabética.
     """
     # Ordenar as tarefas prioritárias por ordem alfabética
-    print(lista_de_tarefas)
     lista_de_tarefas.sort(key=ordena)
-    print(lista_de_tarefas)
 
 def get_lista_de_tarefas():
     """
