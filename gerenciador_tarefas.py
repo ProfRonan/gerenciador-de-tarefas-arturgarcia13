@@ -37,7 +37,7 @@ def remove_tarefas(índices: tuple[int]):
     """
     if len(índices) < 0 or len(índices) >= len(lista_de_tarefas):
             raise ValueError("Tarefa não existe")
-    for index in índices:
+    for index, element in enumerate(índices):
         del lista_de_tarefas[index]
 
 def encontra_tarefa(tarefa: str) -> int:
