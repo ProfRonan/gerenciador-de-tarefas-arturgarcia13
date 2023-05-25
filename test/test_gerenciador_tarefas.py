@@ -36,25 +36,25 @@ class TestFunction(unittest.TestCase):
     def test_adiciona_tarefa_prioridade_inválida(self):
         """Testa se é possível adicionar uma tarefa à com prioridade inválida"""
         tarefa = {"prioridade": "prioridade inválida", "tarefa": "Tarefa 1"}
-        self.assertRaises(ValueError, gt.adicionar_tarefa(
-            tarefa["prioridade"], tarefa["tarefa"]))
+        self.assertRaises(ValueError, gt.adicionar_tarefa,
+                          tarefa["prioridade"], tarefa["tarefa"])
 
     def test_adiciona_tarefa_já_existente(self):
         """Testa se é possível adicionar uma tarefa com mesmo nome de outra"""
         tarefa = {"prioridade": "prioridade inválida", "tarefa": "Tarefa 1"}
         gt.adicionar_tarefa(tarefa["prioridade"], tarefa["tarefa"])
-        self.assertRaises(ValueError, gt.adicionar_tarefa(
-            tarefa["prioridade"], tarefa["tarefa"]))
+        self.assertRaises(ValueError, gt.adicionar_tarefa,
+                          tarefa["prioridade"], tarefa["tarefa"])
 
     def test_remove_tarefa_lista_vazia(self):
         """Testa se é possível remover uma tarefa da lista vazia"""
-        self.assertRaises(ValueError, gt.remove_tarefas((0,)))
+        self.assertRaises(ValueError, gt.remove_tarefas, (0,))
 
     def test_remove_tarefa_lista_com_elementos(self):
         """Testa se é possível remover uma tarefa da lista sem ter o elemento nela"""
         tarefa = {"prioridade": True, "tarefa": "Tarefa 1"}
         gt.adicionar_tarefa(tarefa["prioridade"], tarefa["tarefa"])
-        self.assertRaises(ValueError, gt.remove_tarefas((1,)))
+        self.assertRaises(ValueError, gt.remove_tarefas, (1,))
 
     def test_remove_tarefa_lista_várias(self):
         """Testa se é possível remover várias tarefas da lista"""
