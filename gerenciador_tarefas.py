@@ -28,6 +28,7 @@ def adicionar_tarefa(prioridade: bool, tarefa: str):
 
 def remove_tarefas(índices: tuple[int]):
     """
+
     Remove várias tarefas da lista de tarefas de uma vez, dado uma tupla de índices
     Lança exceções caso a tarefa não exista
 
@@ -35,10 +36,13 @@ def remove_tarefas(índices: tuple[int]):
         índices (tuple[int]): tupla de inteiros que representam os índices das tarefas
                              que devem ser removidas da lista.
     """
-    if len(índices) < 0 or len(índices) >= len(lista_de_tarefas):
+    tamanho_de_tarefas = len(lista_de_tarefas)
+    índices = sorted(list(índices), reverse=True)
+    for i in índices:
+        if i >= 0 and i < tamanho_de_tarefas:
+            lista_de_tarefas.pop(i)
+        else:
             raise ValueError("Tarefa não existe")
-    for index, element in enumerate(índices):
-        del lista_de_tarefas[element]
 
 def encontra_tarefa(tarefa: str) -> int:
     """

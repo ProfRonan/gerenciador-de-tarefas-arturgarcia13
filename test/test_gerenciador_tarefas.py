@@ -41,7 +41,7 @@ class TestFunction(unittest.TestCase):
 
     def test_adiciona_tarefa_já_existente(self):
         """Testa se é possível adicionar uma tarefa com mesmo nome de outra"""
-        tarefa = {"prioridade": "prioridade inválida", "tarefa": "Tarefa 1"}
+        tarefa = {"prioridade": True, "tarefa": "Tarefa 1"}
         gt.adicionar_tarefa(tarefa["prioridade"], tarefa["tarefa"])
         self.assertRaises(ValueError, gt.adicionar_tarefa,
                           tarefa["prioridade"], tarefa["tarefa"])
@@ -66,7 +66,9 @@ class TestFunction(unittest.TestCase):
         ]
         for tarefa in tarefas:
             gt.adicionar_tarefa(tarefa["prioridade"], tarefa["tarefa"])
+        print(gt.lista_de_tarefas)
         gt.remove_tarefas((1, 3))
+        print(gt.lista_de_tarefas)
         self.assertEqual(gt.lista_de_tarefas, [tarefas[0], tarefas[2]])
 
     def test_ordena_prioridade(self):
