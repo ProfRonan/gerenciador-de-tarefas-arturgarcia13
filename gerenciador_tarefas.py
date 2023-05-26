@@ -37,8 +37,8 @@ def remove_tarefas(índices: tuple[int]):
     """
     if len(índices) < 0 or len(índices) >= len(lista_de_tarefas):
             raise ValueError("Tarefa não existe")
-    for index in índices:
-        del lista_de_tarefas[index]
+    for index, element in enumerate(índices):
+        del lista_de_tarefas[element]
 
 def encontra_tarefa(tarefa: str) -> int:
     """
@@ -53,6 +53,9 @@ def encontra_tarefa(tarefa: str) -> int:
             return index
     raise ValueError("Tarefa não existe")
 
+def ordena(dicionario):
+    primeiro = 0 if dicionario['prioridade'] else 1
+    return (primeiro, dicionario['tarefa'])
 
 def ordena_por_prioridade():
     """
@@ -61,28 +64,8 @@ def ordena_por_prioridade():
     As tarefas prioritárias devem ser ordenadas por ordem alfabética e as
     tarefas não prioritárias devem ser ordenadas por ordem alfabética.
     """
-    global lista_de_tarefas
-    lista = lista_de_tarefas
-    # Ordenar as tarefas tarefas prioritárias no começo da lista
-    for i, tarefa in enumerate(lista):
-        if tarefa["prioridade"]:
-            lista.insert(0, lista.pop(i))
-    # Encontrar o index da primeira tarefa sem prioridade
-    indice = int([index for index, elemento in enumerate(lista) if not elemento["prioridade"]].pop(0))
     # Ordenar as tarefas prioritárias por ordem alfabética
-    lista_ordenada_true = sorted(lista[0:indice], key=lambda dicionario: dicionario["tarefa"])
-    for i, dicionário in enumerate(lista[0:indice]):
-        for dict in lista_ordenada_true:
-            if dict["tarefa"] == dicionário["tarefa"]:
-                del lista[i]
-                lista.insert(0, dict)
-        break
-    # Ordenar as tarefas não prioritárias por ordem alfabética
-    lista_ordenada_false = sorted(lista[indice:-1], key=lambda dicionario: dicionario["tarefa"])
-    '''for task in lista_ordenada_false:
-        lista_de_tarefas.insert(indice, task)'''
-
-
+    lista_de_tarefas.sort(key=ordena)
 
 def get_lista_de_tarefas():
     """
